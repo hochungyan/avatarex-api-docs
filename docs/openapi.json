@@ -1301,7 +1301,7 @@
           "Health Check"
         ],
         "summary": "Check service health",
-        "description": "Returns OK if the service is running",
+        "description": "Returns system health status and timestamp",
         "operationId": "healthCheck",
         "responses": {
           "200": {
@@ -1312,11 +1312,18 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": ["UP", "DOWN"],
+                      "description": "Current system status"
                     },
                     "timestamp": {
                       "type": "string",
-                      "format": "date-time"
+                      "format": "date-time",
+                      "description": "Time when health check was performed"
+                    },
+                    "version": {
+                      "type": "string",
+                      "description": "API version"
                     }
                   }
                 },
@@ -1324,7 +1331,8 @@
                   "success": {
                     "value": {
                       "status": "UP",
-                      "timestamp": "2024-03-10T12:00:00Z"
+                      "timestamp": "2024-03-10T12:00:00Z",
+                      "version": "1.0"
                     }
                   }
                 }
@@ -1339,10 +1347,18 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "string"
+                      "type": "string",
+                      "enum": ["UP", "DOWN"],
+                      "description": "Current system status"
                     },
                     "error": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Error description"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Time when error occurred"
                     }
                   }
                 },
@@ -1350,7 +1366,8 @@
                   "error": {
                     "value": {
                       "status": "DOWN",
-                      "error": "Database connection failed"
+                      "error": "Database connection failed",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   }
                 }
