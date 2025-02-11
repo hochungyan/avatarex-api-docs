@@ -105,12 +105,33 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
                   "unauthorized": {
                     "value": {
-                      "error": "Authentication token is missing or invalid"
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "validationError": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid request parameters",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   }
                 }
@@ -214,13 +235,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
                   "notFound": {
                     "value": {
-                      "error": "Bank account not found",
-                      "message": "No bank account exists with the provided ID"
+                      "error": "NOT_FOUND",
+                      "message": "Bank account with provided ID does not exist",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   }
                 }
@@ -253,7 +275,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -317,7 +348,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "notFound": {
+                    "value": {
+                      "error": "NOT_FOUND",
+                      "message": "Bank account with provided ID does not exist",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -327,7 +367,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidInput": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid input",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -337,7 +386,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -547,7 +605,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidAmount": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Transfer amount must be greater than 0",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "insufficientFunds": {
+                    "value": {
+                      "error": "INSUFFICIENT_FUNDS",
+                      "message": "Insufficient funds in the source account",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -656,16 +730,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
-                  "invalidRequest": {
+                  "invalidDates": {
                     "value": {
-                      "error": "Invalid request parameters",
-                      "details": {
-                        "executionDate": "Execution date must be in the future",
-                        "fromQuantity": "Amount must be greater than 0"
-                      }
+                      "error": "VALIDATION_ERROR",
+                      "message": "Execution date must be after expiration date",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "invalidRate": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Execution rate must be greater than 0",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   }
                 }
@@ -1676,7 +1755,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1686,7 +1765,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1706,7 +1785,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -2145,6 +2224,24 @@
           },
           "displayCurrency": {
             "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error code or type"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error message"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time when the error occurred"
           }
         }
       }
