@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "AvatarEx API",
-    "description": "API documentation for AvatarEx Foreign Exchange Trading Platform",
+    "description": "Enterprise-grade REST API for AvatarEx Foreign Exchange Trading Platform. Provides comprehensive endpoints for managing forex trading operations, including account management, fund transfers, forward contracts, and market monitoring.",
     "contact": {
       "name": "AvatarEx Team",
       "email": "support@avatarex.com"
@@ -17,39 +17,39 @@
   "tags": [
     {
       "name": "Health Check",
-      "description": "API for checking service health"
+      "description": "System health monitoring endpoints"
     },
     {
       "name": "User API",
-      "description": "API for user management"
+      "description": "User account management and profile operations"
     },
     {
       "name": "Bank Account",
-      "description": "API for managing bank accounts"
+      "description": "Bank account integration and management operations"
     },
     {
       "name": "WatchList API",
-      "description": "API for managing watchlists"
+      "description": "Currency pair monitoring and market tracking functionality"
     },
     {
       "name": "Fund Transfer",
-      "description": "API for managing fund transfers"
+      "description": "Secure fund transfer operations between bank and brokerage accounts"
     },
     {
       "name": "Forward Request",
-      "description": "API for managing forward requests"
+      "description": "Forward contract request creation and management"
     },
     {
       "name": "Forward Match",
-      "description": "API for managing forward matches"
+      "description": "Forward contract matching and execution operations"
     },
     {
       "name": "Brokerage Account",
-      "description": "API for managing brokerage accounts"
+      "description": "Trading account management and balance operations"
     },
     {
       "name": "auth API",
-      "description": "API for authentication"
+      "description": "Authentication and authorization operations"
     }
   ],
   "paths": {
