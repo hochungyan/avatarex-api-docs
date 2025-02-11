@@ -13,5 +13,1785 @@
     },
     "version": "1.0"
   },
-  // ... rest of your OpenAPI specification ...
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local Development Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Health Check",
+      "description": "API for checking service health"
+    },
+    {
+      "name": "User API",
+      "description": "API for user management"
+    }
+  ],
+  "paths": {
+    "/api/v1/users/me": {
+      "get": {
+        "tags": [
+          "User API"
+        ],
+        "summary": "Get current user",
+        "description": "Get the current user based on the authentication token",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "User retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "User API"
+        ],
+        "summary": "Update user details",
+        "description": "Update email, displayName, or displayed currency of the current user. The User CANNOT update the password currently.",
+        "operationId": "updateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User details updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/bank-accounts/me/{bankAccountId}": {
+      "get": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Retrieve bank account by ID",
+        "operationId": "getBankAccount",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "description": "If the user owns a bank account with this id, it will be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Bank account not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Bank account retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Update bank account",
+        "operationId": "updateBankAccount",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccountUpdateDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bank account updated successfully",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bank account not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Delete bank account",
+        "operationId": "deleteBankAccount",
+        "parameters": [
+          {
+            "name": "bankAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bank account deleted successfully"
+          },
+          "404": {
+            "description": "Bank account not found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/watchlists/me": {
+      "get": {
+        "tags": [
+          "WatchList API"
+        ],
+        "summary": "Get all watchlists for the current user",
+        "operationId": "getWatchLists",
+        "responses": {
+          "200": {
+            "description": "Watchlists retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchListResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchListResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "WatchList API"
+        ],
+        "summary": "Create a new watchlist for the current user",
+        "operationId": "createWatchList",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WatchListRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Watchlist created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/fund-transfers": {
+      "post": {
+        "tags": [
+          "Fund Transfer"
+        ],
+        "summary": "Create a new fund transfer",
+        "operationId": "createFundTransfer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FundTransferRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Fund transfer created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/forward-requests/me": {
+      "get": {
+        "tags": [
+          "Forward Request"
+        ],
+        "summary": "Get all forward requests for the current user",
+        "operationId": "getForwardRequests",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved forward requests",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Forward Request"
+        ],
+        "summary": "Create a forward request for the current user",
+        "operationId": "createForwardRequest",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForwardRequestRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created forward request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/forward-matches/me": {
+      "get": {
+        "tags": [
+          "Forward Match"
+        ],
+        "summary": "Get all forward matches for the current user as a matcher",
+        "operationId": "getForwardMatchesAsMatcher",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved forward matches",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Forward Match"
+        ],
+        "summary": "Create a forward match for the current user for an open forward request",
+        "operationId": "createForwardMatch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForwardMatchRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created forward match",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/brokerage-accounts/me": {
+      "get": {
+        "tags": [
+          "Brokerage Account"
+        ],
+        "summary": "Get all brokerage accounts",
+        "operationId": "getBrokerageAccounts",
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully retrieved brokerage accounts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Brokerage Account"
+        ],
+        "summary": "Create brokerage account",
+        "operationId": "createBrokerageAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrokerageAccountCreateRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully created brokerage account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/bank-accounts/me": {
+      "get": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Retrieve all bank accounts",
+        "operationId": "getBankAccounts",
+        "responses": {
+          "200": {
+            "description": "All bank accounts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankAccountResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Link bank account",
+        "operationId": "linkBankAccount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccountLinkRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Bank account linked successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "auth API"
+        ],
+        "summary": "Create a new user",
+        "operationId": "createUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRegisterDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "User already exists",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "auth API"
+        ],
+        "summary": "Login",
+        "operationId": "login",
+        "responses": {
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "User logged in",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/watchlists/me/{watchListId}": {
+      "get": {
+        "tags": [
+          "WatchList API"
+        ],
+        "summary": "Get a watchlist by ID for the current user",
+        "operationId": "getWatchList",
+        "parameters": [
+          {
+            "name": "watchListId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Watchlist not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Watchlist retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/WatchListResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "WatchList API"
+        ],
+        "summary": "Delete a watchlist by ID for the current user",
+        "operationId": "deleteWatchList",
+        "parameters": [
+          {
+            "name": "watchListId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Watchlist deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "Health Check"
+        ],
+        "summary": "Check service health",
+        "description": "Returns OK if the service is running",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fund-transfers/me": {
+      "get": {
+        "tags": [
+          "Fund Transfer"
+        ],
+        "summary": "Get all fund transfers for the current user",
+        "operationId": "getFundTransfers",
+        "responses": {
+          "200": {
+            "description": "Fund transfers retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FundTransferResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/fund-transfers/me/{fundTransferId}": {
+      "get": {
+        "tags": [
+          "Fund Transfer"
+        ],
+        "summary": "Get a fund transfer by ID",
+        "operationId": "getFundTransfer",
+        "parameters": [
+          {
+            "name": "fundTransferId",
+            "in": "path",
+            "description": "The ID of the fund transfer to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Fund transfer retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/forward-requests/me/{id}": {
+      "get": {
+        "tags": [
+          "Forward Request"
+        ],
+        "summary": "Get a forward request by ID for the current user",
+        "operationId": "getForwardRequestById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved forward request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Forward request not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Forward Request"
+        ],
+        "summary": "Delete a forward request by ID for the current user",
+        "operationId": "deleteForwardRequest",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted forward request"
+          },
+          "404": {
+            "description": "Forward request not found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/forward-matches/me/{id}": {
+      "get": {
+        "tags": [
+          "Forward Match"
+        ],
+        "summary": "Get a forward match by ID for the current user as a matcher",
+        "operationId": "getForwardMatchById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Forward match not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully retrieved forward match",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    },
+    "/api/v1/brokerage-accounts/me/{brokerageAccountId}": {
+      "get": {
+        "tags": [
+          "Brokerage Account"
+        ],
+        "summary": "Get brokerage account by ID",
+        "operationId": "getBrokerageAccount",
+        "parameters": [
+          {
+            "name": "brokerageAccountId",
+            "in": "path",
+            "description": "The ID of the brokerage account to retrieve",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Brokerage account not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully retrieved brokerage account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Brokerage Account"
+        ],
+        "summary": "Delete brokerage account",
+        "operationId": "deleteBrokerageAccount",
+        "parameters": [
+          {
+            "name": "brokerageAccountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Successfully deleted brokerage account"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer Authentication": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserUpdateDto": {
+        "required": [
+          "displayName",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "displayName": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "displayCurrency": {
+            "type": "string"
+          }
+        }
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "email": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "displayCurrency": {
+            "type": "string"
+          }
+        }
+      },
+      "BankAccountUpdateDto": {
+        "required": [
+          "accountNumber",
+          "bankName",
+          "currencyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "maxLength": 20,
+            "minLength": 10,
+            "type": "string"
+          },
+          "bankName": {
+            "maxLength": 100,
+            "minLength": 2,
+            "type": "string"
+          },
+          "currencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          }
+        }
+      },
+      "BankAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "currencyCode": {
+            "type": "string"
+          }
+        }
+      },
+      "WatchListRequestDto": {
+        "required": [
+          "fromCurrencyCode",
+          "toCurrencyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "fromCurrencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          },
+          "toCurrencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          }
+        }
+      },
+      "WatchListResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fromCurrencyCode": {
+            "type": "string"
+          },
+          "toCurrencyCode": {
+            "type": "string"
+          }
+        }
+      },
+      "FundTransferRequestDto": {
+        "required": [
+          "bankAccountId",
+          "brokerageAccountId",
+          "isWithdrawal",
+          "transferAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "isWithdrawal": {
+            "type": "boolean",
+            "description": "Whether this is a withdrawal from brokerage to bank account (true) or deposit from bank to brokerage account (false)",
+            "example": true
+          },
+          "bankAccountId": {
+            "type": "string",
+            "description": "The ID of the bank account to transfer funds from/to",
+            "format": "uuid",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "brokerageAccountId": {
+            "type": "string",
+            "description": "The ID of the brokerage account to transfer funds from/to",
+            "format": "uuid",
+            "example": "123e4567-e89b-12d3-a456-426614174001"
+          },
+          "transferAmount": {
+            "minimum": 0.01,
+            "type": "number",
+            "description": "The amount to transfer. Must be positive and in the currency of both accounts",
+            "format": "double",
+            "example": 1000
+          }
+        },
+        "description": "Request object for creating a fund transfer between bank and brokerage accounts"
+      },
+      "FundTransferResponseDto": {
+        "type": "object",
+        "properties": {
+          "transferId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isWithdrawal": {
+            "type": "boolean"
+          },
+          "transferAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "bankAccountId": {
+            "type": "string"
+          },
+          "brokerageAccountId": {
+            "type": "string"
+          }
+        }
+      },
+      "ForwardRequestRequestDto": {
+        "required": [
+          "executionDate",
+          "executionRate",
+          "expirationDate",
+          "fromCurrencyCode",
+          "fromQuantity",
+          "isBuy",
+          "toCurrencyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "isBuy": {
+            "type": "boolean"
+          },
+          "fromCurrencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          },
+          "toCurrencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          },
+          "executionRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "fromQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "executionDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "ForwardMatchResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "matchedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "matcherId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "forwardRequest": {
+            "$ref": "#/components/schemas/ForwardRequestResponseDto"
+          }
+        }
+      },
+      "ForwardRequestResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isBuy": {
+            "type": "boolean"
+          },
+          "fromCurrencyCode": {
+            "type": "string"
+          },
+          "toCurrencyCode": {
+            "type": "string"
+          },
+          "executionRate": {
+            "type": "number",
+            "format": "double"
+          },
+          "fromQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "executionDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "forwardMatch": {
+            "$ref": "#/components/schemas/ForwardMatchResponseDto"
+          }
+        }
+      },
+      "ForwardMatchRequestDto": {
+        "required": [
+          "forwardRequestId"
+        ],
+        "type": "object",
+        "properties": {
+          "forwardRequestId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BrokerageAccountCreateRequestDto": {
+        "required": [
+          "currencyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "currencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          }
+        }
+      },
+      "BrokerageAccountResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "currencyCode": {
+            "type": "string"
+          },
+          "balance": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "BankAccountLinkRequestDto": {
+        "required": [
+          "accountNumber",
+          "bankName",
+          "currencyCode"
+        ],
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "maxLength": 20,
+            "minLength": 10,
+            "type": "string"
+          },
+          "bankName": {
+            "maxLength": 100,
+            "minLength": 2,
+            "type": "string"
+          },
+          "currencyCode": {
+            "maxLength": 3,
+            "minLength": 3,
+            "type": "string"
+          }
+        }
+      },
+      "UserRegisterDto": {
+        "required": [
+          "displayName",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "displayName": {
+            "maxLength": 50,
+            "minLength": 3,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 100,
+            "minLength": 8,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$",
+            "type": "string"
+          },
+          "displayCurrency": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 } 
