@@ -13,12 +13,7 @@
     },
     "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "http://localhost:8080",
-      "description": "Local Development Server"
-    }
-  ],
+  "servers": [],
   "tags": [
     {
       "name": "Health Check",
@@ -73,6 +68,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174000",
+                      "email": "john.doe@example.com",
+                      "displayName": "John Doe",
+                      "displayCurrency": "USD"
+                    }
+                  }
                 }
               }
             }
@@ -83,6 +88,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
+                },
+                "examples": {
+                  "serverError": {
+                    "value": {
+                      "error": "Internal server error occurred",
+                      "message": "Unable to process request"
+                    }
+                  }
                 }
               }
             }
@@ -93,6 +106,13 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "Authentication token is missing or invalid"
+                    }
+                  }
                 }
               }
             }
@@ -195,6 +215,14 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
+                },
+                "examples": {
+                  "notFound": {
+                    "value": {
+                      "error": "Bank account not found",
+                      "message": "No bank account exists with the provided ID"
+                    }
+                  }
                 }
               }
             }
@@ -205,6 +233,17 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174001",
+                      "userId": "123e4567-e89b-12d3-a456-426614174000",
+                      "accountNumber": "1234567890",
+                      "bankName": "Example Bank",
+                      "currencyCode": "USD"
+                    }
+                  }
                 }
               }
             }
@@ -248,6 +287,15 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BankAccountUpdateDto"
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "accountNumber": "1234567890",
+                    "bankName": "Updated Bank Name",
+                    "currencyCode": "USD"
+                  }
+                }
               }
             }
           },
@@ -350,6 +398,18 @@
               "application/json": {
                 "schema": {
                   "type": "string"
+                },
+                "examples": {
+                  "success": {
+                    "value": [
+                      {
+                        "id": "123e4567-e89b-12d3-a456-426614174002",
+                        "userId": "123e4567-e89b-12d3-a456-426614174000",
+                        "fromCurrencyCode": "USD",
+                        "toCurrencyCode": "EUR"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -454,6 +514,16 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/FundTransferRequestDto"
+              },
+              "examples": {
+                "transfer": {
+                  "value": {
+                    "isWithdrawal": false,
+                    "bankAccountId": "123e4567-e89b-12d3-a456-426614174001",
+                    "brokerageAccountId": "123e4567-e89b-12d3-a456-426614174003",
+                    "transferAmount": 1000.00
+                  }
+                }
               }
             }
           },
@@ -466,6 +536,17 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "transferId": "123e4567-e89b-12d3-a456-426614174004",
+                      "isWithdrawal": false,
+                      "transferAmount": 1000.00,
+                      "bankAccountId": "123e4567-e89b-12d3-a456-426614174001",
+                      "brokerageAccountId": "123e4567-e89b-12d3-a456-426614174003"
+                    }
+                  }
                 }
               }
             }
@@ -547,6 +628,19 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ForwardRequestRequestDto"
+              },
+              "examples": {
+                "request": {
+                  "value": {
+                    "isBuy": true,
+                    "fromCurrencyCode": "USD",
+                    "toCurrencyCode": "EUR",
+                    "executionRate": 1.05,
+                    "fromQuantity": 10000.00,
+                    "executionDate": "2024-03-15",
+                    "expirationDate": "2024-03-14"
+                  }
+                }
               }
             }
           },
@@ -569,6 +663,17 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                },
+                "examples": {
+                  "invalidRequest": {
+                    "value": {
+                      "error": "Invalid request parameters",
+                      "details": {
+                        "executionDate": "Execution date must be in the future",
+                        "fromQuantity": "Amount must be greater than 0"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -640,6 +745,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ForwardMatchRequestDto"
+              },
+              "examples": {
+                "match": {
+                  "value": {
+                    "forwardRequestId": "123e4567-e89b-12d3-a456-426614174005"
+                  }
+                }
               }
             }
           },
@@ -652,6 +764,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174006",
+                      "matchedAt": "2024-03-10T15:30:00Z",
+                      "matcherId": "123e4567-e89b-12d3-a456-426614174000",
+                      "forwardRequest": {
+                        "id": "123e4567-e89b-12d3-a456-426614174005",
+                        "userId": "123e4567-e89b-12d3-a456-426614174007",
+                        "isBuy": true,
+                        "fromCurrencyCode": "USD",
+                        "toCurrencyCode": "EUR",
+                        "executionRate": 1.05,
+                        "fromQuantity": 10000.00,
+                        "executionDate": "2024-03-15T00:00:00Z",
+                        "expirationDate": "2024-03-14T00:00:00Z"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -746,6 +878,13 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/BrokerageAccountCreateRequestDto"
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "currencyCode": "USD"
+                  }
+                }
               }
             }
           }
@@ -767,6 +906,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174003",
+                      "userId": "123e4567-e89b-12d3-a456-426614174000",
+                      "currencyCode": "USD",
+                      "balance": 0.00
+                    }
+                  }
                 }
               }
             }
@@ -894,6 +1043,16 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UserRegisterDto"
+              },
+              "examples": {
+                "register": {
+                  "value": {
+                    "email": "john.doe@example.com",
+                    "displayName": "John Doe",
+                    "password": "Password123",
+                    "displayCurrency": "USD"
+                  }
+                }
               }
             }
           },
@@ -961,6 +1120,14 @@
                   }
                 }
               }
+            },
+            "examples": {
+              "login": {
+                "value": {
+                  "email": "john.doe@example.com",
+                  "password": "Password123"
+                }
+              }
             }
           }
         },
@@ -976,6 +1143,13 @@
                       "type": "string"
                     }
                   }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
                 }
               }
             }
@@ -988,6 +1162,19 @@
                   "type": "object",
                   "additionalProperties": {
                     "type": "string"
+                  }
+                },
+                "examples": {
+                  "invalidCredentials": {
+                    "value": {
+                      "error": "Invalid email or password"
+                    }
+                  },
+                  "validationError": {
+                    "value": {
+                      "email": "Email is required",
+                      "password": "Password must be at least 8 characters"
+                    }
                   }
                 }
               }
@@ -1031,6 +1218,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WatchListResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174002",
+                      "userId": "123e4567-e89b-12d3-a456-426614174000",
+                      "fromCurrencyCode": "USD",
+                      "toCurrencyCode": "EUR"
+                    }
+                  }
                 }
               }
             }
@@ -1194,6 +1391,17 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "transferId": "123e4567-e89b-12d3-a456-426614174004",
+                      "isWithdrawal": false,
+                      "transferAmount": 1000.00,
+                      "bankAccountId": "123e4567-e89b-12d3-a456-426614174001",
+                      "brokerageAccountId": "123e4567-e89b-12d3-a456-426614174003"
+                    }
+                  }
                 }
               }
             }
@@ -1241,6 +1449,21 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "id": "123e4567-e89b-12d3-a456-426614174005",
+                      "userId": "123e4567-e89b-12d3-a456-426614174000",
+                      "isBuy": true,
+                      "fromCurrencyCode": "USD",
+                      "toCurrencyCode": "EUR",
+                      "executionRate": 1.05,
+                      "fromQuantity": 10000.00,
+                      "executionDate": "2024-03-15T00:00:00Z",
+                      "expirationDate": "2024-03-14T00:00:00Z"
+                    }
+                  }
                 }
               }
             }
