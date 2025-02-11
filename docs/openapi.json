@@ -397,18 +397,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
-                },
-                "examples": {
-                  "success": {
-                    "value": [
-                      {
-                        "id": "123e4567-e89b-12d3-a456-426614174002",
-                        "userId": "123e4567-e89b-12d3-a456-426614174000",
-                        "fromCurrencyCode": "USD",
-                        "toCurrencyCode": "EUR"
-                      }
-                    ]
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WatchListResponseDto"
                   }
                 }
               }
@@ -592,7 +583,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  }
                 }
               }
             }
@@ -709,7 +703,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  }
                 }
               }
             }
@@ -842,7 +839,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  }
                 }
               }
             }
@@ -951,7 +951,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BankAccountResponseDto"
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": [{
+                      "id": "123e4567-e89b-12d3-a456-426614174001",
+                      "userId": "123e4567-e89b-12d3-a456-426614174000",
+                      "accountNumber": "1234567890",
+                      "bankName": "Example Bank",
+                      "currencyCode": "USD"
+                    }]
+                  }
                 }
               }
             }
@@ -1119,13 +1133,13 @@
                     "format": "password"
                   }
                 }
-              }
-            },
-            "examples": {
-              "login": {
-                "value": {
-                  "email": "john.doe@example.com",
-                  "password": "Password123"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "john.doe@example.com",
+                    "password": "Password123"
+                  }
                 }
               }
             }
@@ -1147,7 +1161,7 @@
                 "examples": {
                   "success": {
                     "value": {
-                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U"
                     }
                   }
                 }
@@ -1701,22 +1715,21 @@
     },
     "schemas": {
       "UserUpdateDto": {
-        "required": [
-          "displayName",
-          "email"
-        ],
         "type": "object",
         "properties": {
           "email": {
-            "type": "string"
+            "type": "string",
+            "example": "john.doe@example.com"
           },
           "displayName": {
+            "type": "string",
+            "example": "John Doe",
             "maxLength": 50,
-            "minLength": 3,
-            "type": "string"
+            "minLength": 3
           },
           "displayCurrency": {
-            "type": "string"
+            "type": "string",
+            "example": "USD"
           }
         }
       },
@@ -1747,19 +1760,22 @@
         "type": "object",
         "properties": {
           "accountNumber": {
+            "type": "string",
             "maxLength": 20,
             "minLength": 10,
-            "type": "string"
+            "example": "1234567890"
           },
           "bankName": {
+            "type": "string",
             "maxLength": 100,
             "minLength": 2,
-            "type": "string"
+            "example": "Example Bank"
           },
           "currencyCode": {
+            "type": "string",
             "maxLength": 3,
             "minLength": 3,
-            "type": "string"
+            "example": "USD"
           }
         }
       },
