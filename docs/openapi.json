@@ -1309,7 +1309,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "examples": {
+                  "success": {
+                    "value": {
+                      "status": "UP",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1319,7 +1336,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "error": {
+                    "value": {
+                      "status": "DOWN",
+                      "error": "Database connection failed"
+                    }
+                  }
                 }
               }
             }
