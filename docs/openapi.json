@@ -481,9 +481,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/WatchListResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -528,7 +534,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WatchListResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidCurrency": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid currency code format",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "sameCurrency": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "From and To currency codes cannot be the same",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -538,7 +560,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WatchListResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -631,7 +662,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -670,9 +710,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -756,7 +802,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -795,9 +850,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -869,7 +930,30 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "alreadyMatched": {
+                    "value": {
+                      "error": "ALREADY_MATCHED",
+                      "message": "Forward request is already matched",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "expired": {
+                    "value": {
+                      "error": "EXPIRED",
+                      "message": "Forward request has expired",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "selfMatch": {
+                    "value": {
+                      "error": "SELF_MATCH",
+                      "message": "Cannot match your own forward request",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -879,7 +963,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -931,9 +1024,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -974,7 +1073,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidCurrency": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid currency code",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "duplicateCurrency": {
+                    "value": {
+                      "error": "DUPLICATE_CURRENCY",
+                      "message": "Brokerage account with this currency already exists",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1004,7 +1119,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BrokerageAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1054,9 +1178,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -1101,7 +1231,23 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidInput": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid bank account details",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "duplicateAccount": {
+                    "value": {
+                      "error": "DUPLICATE_ACCOUNT",
+                      "message": "Bank account already exists",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1111,7 +1257,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BankAccountResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1157,9 +1312,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidEmail": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid email format",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  },
+                  "passwordTooWeak": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -1170,7 +1338,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UserDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "duplicate": {
+                    "value": {
+                      "error": "DUPLICATE_USER",
+                      "message": "User with this email already exists",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1252,21 +1429,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
+                  "$ref": "#/components/schemas/ErrorResponse"
                 },
                 "examples": {
                   "invalidCredentials": {
                     "value": {
-                      "error": "Invalid email or password"
+                      "error": "INVALID_CREDENTIALS",
+                      "message": "Invalid email or password",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   },
                   "validationError": {
                     "value": {
-                      "email": "Email is required",
-                      "password": "Password must be at least 8 characters"
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid input parameters",
+                      "timestamp": "2024-03-10T12:00:00Z"
                     }
                   }
                 }
@@ -1300,7 +1477,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WatchListResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "notFound": {
+                    "value": {
+                      "error": "NOT_FOUND",
+                      "message": "Watchlist with provided ID does not exist",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1330,7 +1516,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/WatchListResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1363,8 +1549,43 @@
           "200": {
             "description": "Watchlist deleted successfully"
           },
+          "404": {
+            "description": "Watchlist not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "notFound": {
+                    "value": {
+                      "error": "NOT_FOUND",
+                      "message": "Watchlist with provided ID does not exist",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "security": [
@@ -1482,9 +1703,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/FundTransferResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "unauthorized": {
+                    "value": {
+                      "error": "UNAUTHORIZED",
+                      "message": "Authentication token is missing or invalid",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
                   }
                 }
               }
@@ -1523,7 +1750,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "invalidId": {
+                    "value": {
+                      "error": "VALIDATION_ERROR",
+                      "message": "Invalid transfer ID format",
+                      "timestamp": "2024-03-10T12:00:00Z"
+                    }
+                  }
                 }
               }
             }
@@ -1554,7 +1790,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FundTransferResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1616,7 +1852,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1626,7 +1862,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardRequestResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1697,7 +1933,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -1717,7 +1953,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ForwardMatchResponseDto"
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
