@@ -27,6 +27,34 @@
     {
       "name": "User API",
       "description": "API for user management"
+    },
+    {
+      "name": "Bank Account",
+      "description": "API for managing bank accounts"
+    },
+    {
+      "name": "WatchList API",
+      "description": "API for managing watchlists"
+    },
+    {
+      "name": "Fund Transfer",
+      "description": "API for managing fund transfers"
+    },
+    {
+      "name": "Forward Request",
+      "description": "API for managing forward requests"
+    },
+    {
+      "name": "Forward Match",
+      "description": "API for managing forward matches"
+    },
+    {
+      "name": "Brokerage Account",
+      "description": "API for managing brokerage accounts"
+    },
+    {
+      "name": "auth API",
+      "description": "API for authentication"
     }
   ],
   "paths": {
@@ -52,7 +80,7 @@
           "500": {
             "description": "Internal server error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -62,7 +90,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -106,7 +134,7 @@
           "500": {
             "description": "Internal server error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -116,7 +144,7 @@
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -126,7 +154,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -164,7 +192,7 @@
           "404": {
             "description": "Bank account not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -184,7 +212,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -229,7 +257,7 @@
           "200": {
             "description": "Bank account updated successfully",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -239,7 +267,7 @@
           "404": {
             "description": "Bank account not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -249,7 +277,7 @@
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -259,7 +287,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -329,7 +357,7 @@
           "500": {
             "description": "Internal server error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -342,7 +370,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -389,7 +417,7 @@
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WatchListResponseDto"
                 }
@@ -399,7 +427,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WatchListResponseDto"
                 }
@@ -445,7 +473,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
                 }
@@ -455,7 +483,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
                 }
@@ -481,7 +509,7 @@
           "200": {
             "description": "Successfully retrieved forward requests",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
@@ -491,7 +519,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -528,7 +556,7 @@
           "200": {
             "description": "Successfully created forward request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -538,7 +566,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -548,7 +576,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -574,7 +602,7 @@
           "200": {
             "description": "Successfully retrieved forward matches",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
@@ -584,7 +612,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -621,7 +649,7 @@
           "200": {
             "description": "Successfully created forward match",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -631,7 +659,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -641,7 +669,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -667,7 +695,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -690,7 +718,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -726,7 +754,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
                 }
@@ -746,7 +774,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
                 }
@@ -782,7 +810,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -829,7 +857,7 @@
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -839,7 +867,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BankAccountResponseDto"
                 }
@@ -875,7 +903,7 @@
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": {
@@ -888,7 +916,7 @@
           "409": {
             "description": "User already exists",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserDto"
                 }
@@ -915,25 +943,53 @@
         ],
         "summary": "Login",
         "operationId": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
+          "200": {
+            "description": "User logged in",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "Invalid input",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "object",
                   "additionalProperties": {
                     "type": "string"
                   }
                 }
-              }
-            }
-          },
-          "200": {
-            "description": "User logged in",
-            "content": {
-              "application/json": {
-
               }
             }
           }
@@ -962,7 +1018,7 @@
           "404": {
             "description": "Watchlist not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WatchListResponseDto"
                 }
@@ -982,7 +1038,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/WatchListResponseDto"
                 }
@@ -1040,7 +1096,7 @@
           "200": {
             "description": "Service is healthy",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
@@ -1050,7 +1106,7 @@
           "500": {
             "description": "Internal server error",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "string"
                 }
@@ -1073,7 +1129,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FundTransferResponseDto"
+                  }
                 }
               }
             }
@@ -1081,7 +1140,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
@@ -1122,7 +1181,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
                 }
@@ -1142,7 +1201,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FundTransferResponseDto"
                 }
@@ -1179,7 +1238,7 @@
           "200": {
             "description": "Successfully retrieved forward request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -1189,7 +1248,7 @@
           "404": {
             "description": "Forward request not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -1199,7 +1258,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardRequestResponseDto"
                 }
@@ -1270,7 +1329,7 @@
           "404": {
             "description": "Forward match not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -1280,7 +1339,7 @@
           "200": {
             "description": "Successfully retrieved forward match",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -1290,7 +1349,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ForwardMatchResponseDto"
                 }
@@ -1328,7 +1387,7 @@
           "404": {
             "description": "Brokerage account not found",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
                 }
@@ -1338,7 +1397,7 @@
           "400": {
             "description": "Bad request",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
                 }
@@ -1358,7 +1417,7 @@
           "401": {
             "description": "Unauthorized",
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BrokerageAccountResponseDto"
                 }
